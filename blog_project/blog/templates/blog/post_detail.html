@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ post.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="post-detail">
+        <h1 class="post-detail-title">{{ post.title }}</h1>
+
+        <!-- Display creation date -->
+        <div class="post-meta">
+          📅 Posted on: {{ post.created_at|date:"F d, Y at h:i A" }}
+        </div>
+
+        <hr />
+
+        <!-- Display full content of the post -->
+        <div class="post-detail-content">{{ post.content|linebreaks }}</div>
+      </div>
+
+      <hr />
+
+      <!-- Action buttons -->
+      <div class="post-actions">
+        <a href="{% url 'home' %}" class="btn"> 🏠 Back to Home </a>
+
+        <a href="{% url 'post_edit' post.pk %}" class="btn btn-edit">
+          ✏️ Edit Post
+        </a>
+
+        <a href="{% url 'post_delete' post.pk %}" class="btn btn-delete">
+          🗑️ Delete Post
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

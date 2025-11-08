@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Post</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚠️ Delete Blog Post</h1>
+
+      <!-- Confirmation message -->
+      <div class="delete-warning">
+        <p>Are you sure you want to delete the post:</p>
+        <p><strong>"{{ post.title }}"</strong></p>
+        <p><strong>⚠️ This action cannot be undone!</strong></p>
+      </div>
+
+      <!-- Confirmation form -->
+      <form method="post">
+        <!-- CSRF token is required for security -->
+        {% csrf_token %}
+
+        <div class="post-actions">
+          <!-- Delete confirmation button -->
+          <button type="submit" class="btn btn-danger">
+            🗑️ Yes, Delete This Post
+          </button>
+
+          <!-- Cancel button -->
+          <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary">
+            ❌ Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

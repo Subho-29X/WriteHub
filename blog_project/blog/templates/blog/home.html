@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Blog - Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header-section">
+        <h1>✨ Welcome to My Blog ✨</h1>
+
+        <!-- Button to create a new post -->
+        <p>
+          <a href="{% url 'post_create' %}" class="btn"> ➕ Create New Post </a>
+        </p>
+      </div>
+
+      <hr />
+
+      <!-- Check if there are any posts -->
+      {% if posts %}
+      <h2>📚 All Blog Posts</h2>
+
+      <!-- Loop through all posts and display them -->
+      {% for post in posts %}
+      <div class="post-card">
+        <h3>{{ post.title }}</h3>
+
+        <!-- Show first 30 words of content -->
+        <div class="post-content">{{ post.content|truncatewords:30 }}</div>
+
+        <!-- Display creation date -->
+        <div class="post-meta">
+          📅 Posted on: {{ post.created_at|date:"F d, Y at h:i A" }}
+        </div>
+
+        <!-- Links to view, edit, and delete the post -->
+        <div class="post-actions">
+          <a href="{% url 'post_detail' post.pk %}" class="btn">
+            📖 Read More
+          </a>
+
+          <a href="{% url 'post_edit' post.pk %}" class="btn btn-edit">
+            ✏️ Edit
+          </a>
+
+          <a href="{% url 'post_delete' post.pk %}" class="btn btn-delete">
+            🗑️ Delete
+          </a>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <!-- Show this message if there are no posts yet -->
+      <div class="empty-state">
+        <p>📝 No blog posts yet.</p>
+        <a href="{% url 'post_create' %}" class="btn">
+          Create your first post!
+        </a>
+      </div>
+      {% endif %}
+
+      <hr />
+      <footer>
+        <p>🔐 <a href="/admin/">Go to Admin Panel</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
