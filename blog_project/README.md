@@ -244,9 +244,7 @@ Solution: Run migrations with `python manage.py migrate`
 
 Solution: Run on a different port with `python manage.py runserver 8001`
 
-### Can't access admin panel
-
-Solution: Make sure you created a superuser with `python manage.py createsuperuser`
+### 
 
 ## 📄 License
 
